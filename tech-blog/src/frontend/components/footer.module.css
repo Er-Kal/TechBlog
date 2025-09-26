@@ -1,0 +1,14 @@
+.footer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: aquamarine;
+    padding-top: 26px;
+}
+
+.nav{
+    display: flex;
+    a{
+        padding:5px
+    }
+}
