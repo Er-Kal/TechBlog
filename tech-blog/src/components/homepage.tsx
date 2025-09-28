@@ -2,7 +2,7 @@
 
 import { useEffect,useState } from "react";
 import { getLatestBlogs } from "../services/blogService";
-import Blog from "../components/blog";
+import BlogPreview from "./blogpreview";
 
 export default function HomePage(){
     const [blogs,setBlogs] = useState<any[]>([])
@@ -11,12 +11,10 @@ export default function HomePage(){
     },[]);
     console.log(getLatestBlogs(5))
     return (<div>
-        <main>
             <ul>
                 {blogs.map(blog => (
-                    <Blog key={blog.id} content={blog.content}></Blog>
+                    <BlogPreview key={blog.id} preview_content={blog.preview_content} author={blog.author}></BlogPreview>
                 ))}
             </ul>
-        </main>
     </div>);
 }

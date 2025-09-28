@@ -4,6 +4,7 @@
     align-items: center;
     background-color: aquamarine;
     padding-top: 26px;
+    min-width: 100vw;
 }
 
 .nav{
