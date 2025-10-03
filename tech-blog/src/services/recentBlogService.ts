@@ -5,7 +5,7 @@ export async function getLatestBlogs(limit: number = 5){
     
     if (error) {
         console.error("There was an error fetching the latest blogs:",error)
-        return [];
+        return null;
     }
     return data;
 }

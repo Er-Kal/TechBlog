@@ -1,19 +1,21 @@
 'use client'
 
 import { useEffect,useState } from "react";
-import { getLatestBlogs } from "../services/blogService";
+import { getLatestBlogs } from "../services/recentBlogService";
 import BlogPreview from "./blogpreview";
 
 export default function HomePage(){
-    const [blogs,setBlogs] = useState<any[]>([])
+    const [blogs,setBlogs] = useState<any[] | null>([])
     useEffect(() => {
         getLatestBlogs(5).then(setBlogs)
     },[]);
     console.log(getLatestBlogs(5))
-    return (<div>
+    return (
+    <div>
+        <h2>Latest Blogs</h2>
             <ul>
-                {blogs.map(blog => (
-                    <BlogPreview key={blog.id} preview_content={blog.preview_content} author={blog.author}></BlogPreview>
+                {blogs!.map(blog => (
+                    <BlogPreview key={blog.id} blogId={blog.id} previewContent={blog.preview_content} author={blog.author}></BlogPreview>
                 ))}
             </ul>
     </div>);

@@ -1,13 +1,15 @@
-import DOMPurify from 'dompurify';
-import {marked} from 'marked';
-import { useState,useEffect } from 'react';
+import { useState,useEffect } from "react";
+import { marked } from "marked";
+import DOMPurify from "dompurify";
 
-type BlogProps = {
-    key: number,
-    content: string
-};
+type Props = {
+    author:string,
+    content:string,
+    date_created:string,
 
-export default function Blog(props: BlogProps){
+}
+
+export default function Blog(props:Props){
     const [html,setHTML] = useState<string>("");
     useEffect(() => {
         async function convertStringToHTML(){
@@ -17,6 +19,7 @@ export default function Blog(props: BlogProps){
         }
         convertStringToHTML()
     }, [])
-    //const sanitizedHTML = DOMPurify.sanitize(convertedHTML);
-    return (<li dangerouslySetInnerHTML={{ __html:html}}/>)
+    return (
+        <p dangerouslySetInnerHTML={{ __html:html}}></p>
+    )
 }
