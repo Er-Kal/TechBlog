@@ -1,3 +1,4 @@
+import { BlogType } from '@/types/blog';
 import {supabase} from './supabaseClient'
 
 export async function getLatestBlogs(limit: number = 5){
@@ -7,5 +8,8 @@ export async function getLatestBlogs(limit: number = 5){
         console.error("There was an error fetching the latest blogs:",error)
         return null;
     }
-    return data;
+    if (!data || data.length===0){
+        return null;
+    }
+    return (data as BlogType[]);
 }

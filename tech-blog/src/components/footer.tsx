@@ -1,12 +1,13 @@
 import styles from '../styles/footer.module.css'
+import Link from 'next/link'
 
 export default function Footer(){
     return (
         <footer className={styles.footer}>
             <p>{new Date().getFullYear()} Tech Blog</p>
             <nav className={styles.nav}>
-                <a href="/contact">Contact</a>
-                <a href="https://github.com/Er-Kal">Github</a>
+                <Link href="/contact">Contact</Link>
+                <Link href="https://github.com/Er-Kal">Github</Link>
             </nav>
         </footer>
     )

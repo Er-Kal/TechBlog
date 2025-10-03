@@ -1,6 +1,5 @@
 import DOMPurify from 'dompurify';
 import {marked} from 'marked';
-import { redirect } from 'next/dist/server/api-utils';
 import { useState,useEffect } from 'react';
 import Link from 'next/link';
 import styles from '../styles/blogpreview.module.css'
@@ -21,7 +20,7 @@ export default function BlogPreview(props: PreviewProps){
             setHTML(sanitisedHTML)
         }
         convertStringToHTML()
-    }, [])
+    }, [props.previewContent])
     //const sanitizedHTML = DOMPurify.sanitize(convertedHTML);
     return (<li className={styles.li}>
         <p dangerouslySetInnerHTML={{ __html:html}}></p>

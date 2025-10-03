@@ -18,7 +18,7 @@ export default function Blog(props:Props){
             setHTML(sanitisedHTML)
         }
         convertStringToHTML()
-    }, [])
+    }, [props.content])
     return (
         <p dangerouslySetInnerHTML={{ __html:html}}></p>
     )

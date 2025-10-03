@@ -3,9 +3,10 @@
 import { useEffect,useState } from "react";
 import { getLatestBlogs } from "../services/recentBlogService";
 import BlogPreview from "./blogpreview";
+import { BlogType } from "@/types/blog";
 
 export default function HomePage(){
-    const [blogs,setBlogs] = useState<any[] | null>([])
+    const [blogs,setBlogs] = useState<BlogType[] | null>([])
     useEffect(() => {
         getLatestBlogs(5).then(setBlogs)
     },[]);
