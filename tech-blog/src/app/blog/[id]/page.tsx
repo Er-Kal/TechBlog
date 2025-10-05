@@ -1,6 +1,6 @@
 import { retrieveBlog } from "@/services/selectSpecificBlog";
 import { BlogType } from '../../../types/blog'
-import Blog from "@/components/blog";
+import Blog from "@/app/blog/[id]/blog";
 
 export default async function BlogPage({params}: {params: {id:string}}){
     const blogId: number = parseInt(params.id);
