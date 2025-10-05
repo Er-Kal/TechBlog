@@ -8,7 +8,7 @@ import { User } from '@supabase/supabase-js';
 
 export default function Header(){
     const supabase = createClient();
-    const [user,setUser] = useState<User>();
+    const [user,setUser] = useState<User | null>();
 
     useEffect(()=>{
         const getUser = async () =>{
@@ -18,7 +18,7 @@ export default function Header(){
         getUser();
 
         const {data: listener} = supabase.auth.onAuthStateChange((_event, session) => {
-            setUser(session?.user! ?? null);
+            setUser(session?.user ?? null);
         })
 
         return () =>{
