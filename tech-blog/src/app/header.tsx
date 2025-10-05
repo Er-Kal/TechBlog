@@ -4,20 +4,21 @@ import styles from '../styles/header.module.css'
 import Link from 'next/link'
 import { createClient } from '@/utils/supabase/client'
 import { useEffect, useState } from 'react';
+import { User } from '@supabase/supabase-js';
 
 export default function Header(){
     const supabase = createClient();
-    const [user,setUser] = useState<any>();
+    const [user,setUser] = useState<User>();
 
     useEffect(()=>{
         const getUser = async () =>{
             const {data: {user}} = await supabase.auth.getUser();
-            setUser(user);
+            setUser(user!);
         }
         getUser();
 
         const {data: listener} = supabase.auth.onAuthStateChange((_event, session) => {
-            setUser(session?.user ?? null);
+            setUser(session?.user! ?? null);
         })
 
         return () =>{

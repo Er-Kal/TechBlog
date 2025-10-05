@@ -1,4 +1,3 @@
-import type { AppProps } from "next/app";
 import './layout.css'
 import Header from "@/app/header";
 import Footer from "@/app/footer";
