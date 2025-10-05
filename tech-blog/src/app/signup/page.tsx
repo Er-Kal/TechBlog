@@ -1,26 +1,21 @@
-import {signup} from './actions'
-import Link from 'next/link'
-import styles from './signup.module.css'
+'use server'
 
-export default function SignUpPage() {
+import SignupForm from './SignupForm'
+import { redirect } from 'next/navigation'
+import { createClient } from '@/utils/supabase/server'
+
+export default async function SignUpPage() {
+    const supabase = createClient();
+    
+    const {data: {session}} = await (await supabase).auth.getSession();
+
+    if (session){
+        redirect('/')
+    }
+    
     return (
         <main>
-            <div className={styles.formDiv}>
-                <form className={styles.form}>
-                    <label htmlFor="username">Username</label>
-                    <input className={styles.formInput} id="username" name="username" type="username" required/>
-                    <label htmlFor="email">Email</label>
-                    <input className={styles.formInput} id="email" name="email" type="email" required/>
-                    <label htmlFor="password">Password</label>
-                    <input className={styles.formInput} id="password" name="password" type="password" required/>
-                    <button formAction={signup}> Sign Up </button>
-                </form>
-                <p>Already have an account? </p>
-                <Link href='/login'>
-                    <button>Login</button>
-                </Link>
-            </div>
-            
+            <SignupForm/>
         </main>
     )
 }

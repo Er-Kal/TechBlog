@@ -4,7 +4,6 @@ import { createClient } from '@/utils/supabase/server'
 import LoginForm from './LoginForm'
 
 export default async function LoginPage() {
-  //const router = useRouter();
   const supabase = createClient();
 
   const {data: {session}} = await (await supabase).auth.getSession();

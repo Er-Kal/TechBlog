@@ -4,7 +4,9 @@ import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { createClient } from '@/utils/supabase/server'
 
-export type LoginState = { error: string | null }
+type LoginState = { 
+  error: string | null
+}
 
 export async function login(
   prevState: LoginState,
