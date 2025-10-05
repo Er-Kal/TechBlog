@@ -1,7 +1,7 @@
 import type { AppProps } from "next/app";
-import '../styles/layout.css'
-import Header from "@/components/header";
-import Footer from "@/components/footer";
+import './layout.css'
+import Header from "@/app/header";
+import Footer from "@/app/footer";
 
 export default function RootLayout({children}: {children: React.ReactNode}){
     //return (<Component {...pageProps}/>)

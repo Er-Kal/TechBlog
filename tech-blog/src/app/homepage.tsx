@@ -2,7 +2,7 @@
 
 import { useEffect,useState } from "react";
 import { getLatestBlogs } from "../services/recentBlogService";
-import BlogPreview from "./blogpreview";
+import BlogPreview from "./blogpreview";    
 import { BlogType } from "@/types/blog";
 
 export default function HomePage(){

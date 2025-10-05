@@ -1,16 +1,21 @@
-import { login, signup } from './actions'
+'use server'
+import { redirect } from 'next/navigation'
+import { createClient } from '@/utils/supabase/server'
+import LoginForm from './LoginForm'
 
-export default function LoginPage() {
+export default async function LoginPage() {
+  //const router = useRouter();
+  const supabase = createClient();
+
+  const {data: {session}} = await (await supabase).auth.getSession();
+
+  if (session){
+    redirect('/')
+  }
+
   return (
     <main>
-      <form>
-        <label htmlFor="email">Email:</label>
-        <input id="email" name="email" type="email" required />
-        <label htmlFor="password">Password:</label>
-        <input id="password" name="password" type="password" required />
-        <button formAction={login}>Log in</button>
-        <button formAction={signup}>Sign up</button>
-      </form>
+      <LoginForm/>
     </main>
   )
 }
