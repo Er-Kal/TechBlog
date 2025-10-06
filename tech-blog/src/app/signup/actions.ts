@@ -14,15 +14,34 @@ export async function signup(
 ): Promise<SignupState> {
   const supabase = await createClient()
 
-  const data = {
+  const formsData = {
     email: formData.get('email') as string,
     password: formData.get('password') as string,
+    username: formData.get('username') as string,
   }
 
-  const { error } = await supabase.auth.signUp(data)
+  const { error,data } = await supabase.auth.signUp({email:formsData.email,password:formsData.password})
 
   if (error) {
     return {error:error.message}
+  }
+  if (!data.user){
+    return {error:'user not created'}
+  }
+
+  const {error: profileError} = await supabase
+  .from('profiles')
+  .insert([
+    {
+      id:data.user.id,
+      username:formsData.username,
+      bio:'',
+      avatar_url:'https://placehold.co/100x100',
+    }
+  ])
+
+  if (profileError){
+    return {error:profileError.message}
   }
 
   revalidatePath('/', 'layout')

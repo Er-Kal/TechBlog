@@ -2,7 +2,7 @@ import './layout.css'
 import Header from "@/app/header";
 import Footer from "@/app/footer";
 
-export default function RootLayout({children}: {children: React.ReactNode}){
+export default async function RootLayout({children}: {children: React.ReactNode}){
     //return (<Component {...pageProps}/>)
     return (
     <html lang="en">
