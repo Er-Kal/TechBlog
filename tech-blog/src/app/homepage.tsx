@@ -16,7 +16,7 @@ export default function HomePage(){
         <h2>Latest Blogs</h2>
             <ul>
                 {blogs!.map(blog => (
-                    <BlogPreview key={blog.id} blogId={blog.id} previewContent={blog.preview_content} author={blog.author}></BlogPreview>
+                    <BlogPreview key={blog.id} blogId={blog.id} previewContent={blog.preview_content} author_id={blog.author_id}></BlogPreview>
                 ))}
             </ul>
     </div>);

@@ -11,7 +11,7 @@ export default async function BlogPage({params}: {params: {id:string}}){
         return <main><p>Loading or blog not found...</p></main>
     }
     return (<main>
-        <Blog author={blogData.author} content={blogData.content} date_created={blogData.created_at} />
+        <Blog author_id={blogData.author_id} content={blogData.content} date_created={blogData.created_at} />
         <p>These are the likes</p>
         <p>These are the comments</p>
     </main>)

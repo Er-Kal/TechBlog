@@ -7,7 +7,7 @@ import styles from '../styles/blogpreview.module.css'
 type PreviewProps = {
     blogId: number,
     previewContent: string,
-    author: string,
+    author_id: string,
 };
 
 export default function BlogPreview(props: PreviewProps){

@@ -3,25 +3,42 @@
 import { useState,useEffect } from "react";
 import { marked } from "marked";
 import DOMPurify from "dompurify";
+import { createClient } from "@/utils/supabase/client";
 
 type Props = {
-    author:string,
+    author_id:string,
     content:string,
     date_created:string,
-
 }
 
 export default function Blog(props:Props){
     const [html,setHTML] = useState<string>("");
+    const [authorName,setAuthorName] = useState<string>("");
+    const supabase = createClient();
     useEffect(() => {
         async function convertStringToHTML(){
             const convertedHTML: string = await marked.parse(props.content);
             const sanitisedHTML = await DOMPurify.sanitize(convertedHTML);
             setHTML(sanitisedHTML)
         }
-        convertStringToHTML()
-    }, [props.content])
+        convertStringToHTML();
+        async function retrieveAuthorName(){
+            const {data} = await supabase
+            .from('profiles')
+            .select('username')
+            .eq('id',props.author_id);
+            setAuthorName(data![0].username);
+        }
+        retrieveAuthorName();
+    }, [props,supabase])
+
+
+
+
     return (
-        <p dangerouslySetInnerHTML={{ __html:html}}></p>
+        <div className="Blog">
+            <p>Author : {authorName}</p>
+            <p dangerouslySetInnerHTML={{ __html:html}}></p>
+        </div>
     )
 }
