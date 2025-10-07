@@ -34,16 +34,23 @@ export default function Blog(props:Props){
         retrieveAuthorName();
     }, [props,supabase])
 
-
-
+    const createdDate = new Date(props.date_created);
+    const displayDate = createdDate.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
+    const isoDate = createdDate.toISOString();
 
     return (
-        <div className="Blog">
+        <article>
             <div className={styles.blogDetails}>
-                <Link href={'/profile/'+props.author_id}>Author : {authorName}</Link>
-                <p>Posted: {new Date(props.date_created).toLocaleDateString()}</p>
+                <address className="author">
+                    <Link href={'/profile/'+props.author_id}>Author : <a rel="author">{authorName}</a></Link>
+                </address>
+                <p>Posted: <time dateTime={isoDate}>{displayDate}</time></p>
             </div>
-            <p dangerouslySetInnerHTML={{ __html:html}}></p>
-        </div>
+            <div dangerouslySetInnerHTML={{ __html:html}}></div>
+        </article>
     )
 }
