@@ -55,7 +55,10 @@ export default function Header(){
                 <Link href="/">Home</Link>
                 <Link href="/about">About</Link>
                 {user ? (
-                    <a style={{'cursor':'pointer'}} onClick={handleLogout}>Log Out</a>
+                    <>
+                        <a style={{'cursor':'pointer'}} onClick={handleLogout}>Log Out</a>
+                        <Link href={'/profile/'+user.id}>Profile</Link>
+                    </>
                 ) :
                 (
                 <Link href="/login">Login</Link>)}

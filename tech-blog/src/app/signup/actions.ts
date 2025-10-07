@@ -3,6 +3,7 @@
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { createClient } from '@/utils/supabase/server'
+import { createAdminClient } from '@/utils/supabase/adminClient'
 
 type SignupState = {
   error: string | null
@@ -13,6 +14,7 @@ export async function signup(
   formData: FormData
 ): Promise<SignupState> {
   const supabase = await createClient()
+  const supabaseAdmin = await createAdminClient();
 
   const formsData = {
     email: formData.get('email') as string,
@@ -29,7 +31,7 @@ export async function signup(
     return {error:'user not created'}
   }
 
-  const {error: profileError} = await supabase
+  const {error: profileError} = await supabaseAdmin
   .from('profiles')
   .insert([
     {
