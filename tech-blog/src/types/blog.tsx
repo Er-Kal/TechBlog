@@ -4,5 +4,6 @@ export type BlogType = {
     author_id:string,
     created_at:string,
     last_updated_at:string,
-    preview_content:string
+    preview_content:string,
+    title:string
 }

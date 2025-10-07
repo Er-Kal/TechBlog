@@ -1,0 +1,8 @@
+.main{
+    display: flex;
+    flex-direction: row;
+}
+
+.userActivity{
+    padding-left: 2rem;
+}
