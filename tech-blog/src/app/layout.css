@@ -38,6 +38,7 @@ main{
   flex:1;
   max-width: 40rem;
   padding-top:2rem;
+  min-width:40rem;
 }
 
 button{
