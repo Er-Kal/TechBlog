@@ -1,10 +1,10 @@
 import { retrieveBlog } from "@/services/selectSpecificBlog";
-import { BlogType } from '../../../types/blog'
+import { BlogType } from '@/types/blog'
 import Blog from "@/app/blog/[id]/blog";
 
 export default async function BlogPage({params}: {params: {id:string}}){
-    const data = await params;
-    const blogId: number = parseInt(data.id);
+    const data = params;
+    const blogId: number = Number(data.id);
     const blogData: BlogType | null = await retrieveBlog(blogId);
 
     if (!blogData){

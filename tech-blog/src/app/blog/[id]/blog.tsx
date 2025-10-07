@@ -4,6 +4,8 @@ import { useState,useEffect } from "react";
 import { marked } from "marked";
 import DOMPurify from "dompurify";
 import { createClient } from "@/utils/supabase/client";
+import Link from "next/link";
+import styles from './blog.module.css'
 
 type Props = {
     author_id:string,
@@ -37,7 +39,10 @@ export default function Blog(props:Props){
 
     return (
         <div className="Blog">
-            <p>Author : {authorName}</p>
+            <div className={styles.blogDetails}>
+                <Link href={'/profile/'+props.author_id}>Author : {authorName}</Link>
+                <p>Posted: {new Date(props.date_created).toLocaleDateString()}</p>
+            </div>
             <p dangerouslySetInnerHTML={{ __html:html}}></p>
         </div>
     )
