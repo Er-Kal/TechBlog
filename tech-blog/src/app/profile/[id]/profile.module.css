@@ -7,3 +7,16 @@
 .userActivity{
     padding-left: 2rem;
 }
+
+.blogListingListItem{
+    list-style: none;
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+}
+
+.blogListing{
+    display: flex;
+    flex-direction: row;
+    min-width: 25rem;
+    justify-content: space-between;
+}

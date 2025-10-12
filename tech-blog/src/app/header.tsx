@@ -44,9 +44,8 @@ export default function Header(){
     const handleLogout = async () =>{
         await supabase.auth.signOut();
         await refreshAuthState();
+        location.reload();
     }
-
-    
 
     return (
         <header className={styles.header}>

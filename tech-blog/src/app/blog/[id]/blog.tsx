@@ -46,7 +46,7 @@ export default function Blog(props:Props){
         <article>
             <div className={styles.blogDetails}>
                 <address className="author">
-                    <Link href={'/profile/'+props.author_id}>Author : <a rel="author">{authorName}</a></Link>
+                    Author: <Link href={'/profile/'+props.author_id} rel="author">{authorName}</Link>
                 </address>
                 <p>Posted: <time dateTime={isoDate}>{displayDate}</time></p>
             </div>
