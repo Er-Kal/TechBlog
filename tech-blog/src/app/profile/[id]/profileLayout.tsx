@@ -6,6 +6,7 @@ import { User } from "@supabase/supabase-js";
 import Image from "next/image";
 import { submitBioChange } from "./bioChange";
 import { useActionState } from "react";
+import { uploadProfilePicture } from './uploadProfilePicture'
 
 type UserData = {
 	id: string;
@@ -51,6 +52,20 @@ export default function ProfileLayout(props: UserData) {
 		setBioContent(props.bio);
 	};
 
+    const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) =>{
+        const file = event.target.files?.[0];
+		console.log(file);
+		if (!file) return;
+		try{
+			uploadProfilePicture(file);
+			console.log("tried");
+		}
+		catch (error){
+			const errorMessage = error as Error
+			console.error(errorMessage.message);
+		}
+    }
+    const uploading = false;
 	return (
 		<div>
 			<p>{props.username}</p>
@@ -61,6 +76,14 @@ export default function ProfileLayout(props: UserData) {
 				alt="Profile picture"
 				unoptimized
 			/>
+			{user && user.id === props.id && (
+				<input
+					type="file"
+					accept="image/*"
+					onChange={handleFileChange}
+					disabled={uploading}
+				/>
+			)}
 			<p>
 				Bio: <br />
 				{!bioEditToggle && bioContent}
