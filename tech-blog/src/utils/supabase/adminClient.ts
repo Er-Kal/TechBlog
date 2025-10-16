@@ -1,10 +1,10 @@
-'use server'
+"use server";
 
 import { createClient } from "@supabase/supabase-js";
 
-export async function createAdminClient(){
-    return createClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        process.env.NEXT_PRIVATE_SUPABASE_SERVICE_ROLE_KEY!
-    )
+export async function createAdminClient() {
+	return createClient(
+		process.env.NEXT_PUBLIC_SUPABASE_URL!,
+		process.env.NEXT_PRIVATE_SUPABASE_SERVICE_ROLE_KEY!
+	);
 }

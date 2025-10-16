@@ -1,4 +1,6 @@
-.blogDetails{
-    display:flex;
+.likeContainer{
+    display: flex;
+    min-width:2rem;
+    max-width: fit-content;
     justify-content: space-between;
 }

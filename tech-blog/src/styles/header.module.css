@@ -1,16 +1,16 @@
-.header{
-    padding:1rem;
-    display: flex;
-    width: 100%;
-    flex-direction: row;
-    background-color: #208aae;
+.header {
+	padding: 1rem;
+	display: flex;
+	width: 100%;
+	flex-direction: row;
+	background-color: #208aae;
 }
 
-.nav{
-    display: flex;
-    align-self: flex-end;
-    padding-left: 24px;
-    a{
-        padding:4px
-    }
+.nav {
+	display: flex;
+	align-self: flex-end;
+	padding-left: 24px;
+	a {
+		padding: 4px;
+	}
 }

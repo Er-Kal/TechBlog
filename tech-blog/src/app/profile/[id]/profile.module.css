@@ -1,22 +1,22 @@
-.main{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+.main {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
 }
 
-.userActivity{
-    padding-left: 2rem;
+.userActivity {
+	padding-left: 2rem;
 }
 
-.blogListingListItem{
-    list-style: none;
-    margin-top: 0.25rem;
-    margin-bottom: 0.25rem;
+.blogListingListItem {
+	list-style: none;
+	margin-top: 0.25rem;
+	margin-bottom: 0.25rem;
 }
 
-.blogListing{
-    display: flex;
-    flex-direction: row;
-    min-width: 25rem;
-    justify-content: space-between;
+.blogListing {
+	display: flex;
+	flex-direction: row;
+	min-width: 25rem;
+	justify-content: space-between;
 }

@@ -1,6 +1,7 @@
-
-export default function About(){
-    return (<main>
-        <p> This is the about page </p>
-    </main>)
+export default function About() {
+	return (
+		<main>
+			<p> This is the about page </p>
+		</main>
+	);
 }
