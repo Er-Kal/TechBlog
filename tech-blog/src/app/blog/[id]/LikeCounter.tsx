@@ -12,7 +12,7 @@ type Props = {
 };
 
 export default function LikeCounter(props: Props) {
-	const [likes, setLikes] = useState<any>("");
+	const [likes, setLikes] = useState<number>(0);
     const [user, setUser] = useState<User | null>();
     const supabase = createClient();
 
