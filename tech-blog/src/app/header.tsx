@@ -14,17 +14,17 @@ export default function Header() {
 
 	const refreshAuthState = async () => {
 		const {
-			data: { session },
-		} = await supabase.auth.getSession();
-		setUser(session?.user ?? null);
+			data: { user },
+		} = await supabase.auth.getUser();
+		setUser(user ?? null);
 	};
 
 	useEffect(() => {
 		const getUser = async () => {
 			const {
-				data: { session },
-			} = await supabase.auth.getSession();
-			setUser(session?.user ?? null);
+				data: { user },
+			} = await supabase.auth.getUser();
+			setUser(user ?? null);
 		};
 		getUser();
 
@@ -42,9 +42,9 @@ export default function Header() {
 	useEffect(() => {
 		const refreshAuthState = async () => {
 			const {
-				data: { session },
-			} = await supabase.auth.getSession();
-			setUser(session?.user ?? null);
+				data: { user },
+			} = await supabase.auth.getUser();
+			setUser(user ?? null);
 		};
 		refreshAuthState();
 	}, [pathname, supabase]);

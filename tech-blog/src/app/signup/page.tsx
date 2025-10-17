@@ -7,9 +7,9 @@ import { createClient } from '@/utils/supabase/server'
 export default async function SignUpPage() {
     const supabase = createClient();
     
-    const {data: {session}} = await (await supabase).auth.getSession();
+    const {data: {user}} = await (await supabase).auth.getUser();
 
-    if (session){
+    if (user){
         redirect('/')
     }
     
