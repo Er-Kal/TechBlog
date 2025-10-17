@@ -3,4 +3,5 @@
     min-width:2rem;
     max-width: fit-content;
     justify-content: space-between;
+    align-items: center;
 }
