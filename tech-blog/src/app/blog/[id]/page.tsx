@@ -1,3 +1,5 @@
+'use client'
+
 import { retrieveBlog } from "@/services/selectSpecificBlog";
 import { BlogType } from "@/types/blog";
 import Blog from "@/app/blog/[id]/blog";
