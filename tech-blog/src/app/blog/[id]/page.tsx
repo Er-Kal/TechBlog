@@ -1,10 +1,9 @@
-'use client'
 
 import { retrieveBlog } from "@/services/selectSpecificBlog";
 import { BlogType } from "@/types/blog";
 import Blog from "@/app/blog/[id]/blog";
 import LikeCounter from "./LikeCounter";
-
+import Comments from './Comments'
 
 export default async function BlogPage({ params }: { params: { id: string } }) {
 	const data = await params;
@@ -27,7 +26,7 @@ export default async function BlogPage({ params }: { params: { id: string } }) {
 			/>
 			<p>These are the likes</p>
 			<LikeCounter id={blogId}/>
-			<p>These are the comments</p>
+			<Comments blogId={blogId}></Comments>
 		</main>
 	);
 }
