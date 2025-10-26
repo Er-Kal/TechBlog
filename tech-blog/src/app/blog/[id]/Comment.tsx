@@ -1,13 +1,42 @@
+import styles from "./blog.module.css";
+import Link from "next/link";
+import { useState } from "react";
+import { deleteUserComment } from "./actions";
+import { FaRegTrashAlt } from 'react-icons/fa';
 
 type Props = {
-    content: string,
-    created_at: string,
-    author: string,
-    authorId: string,
-}
+	content: string;
+	commentId:number;
+	created_at: string;
+	author: string;
+	authorId: string;
+	userId: string | null;
+	visible: boolean;
+};
 
 export default function Comment(props: Props) {
-    return (<div className="comment">
-        <p>{props.content}</p>
-    </div>)
+	const createdDate = new Date(props.created_at);
+	const displayDate = createdDate.toLocaleDateString("en-US", {
+		year: "numeric",
+		month: "long",
+		day: "numeric",
+	});
+	const [visible,setVisibility] = useState<boolean>(props.visible)
+
+	const deleteComment = () => {
+		setVisibility(false);
+		deleteUserComment(props.commentId)
+	}
+
+	return visible ? (
+		<div className={styles.commentContainer}>
+			<div className={styles.commentHead}>
+				<Link href={`/profile/${props.authorId}`}>{props.author}</Link>
+				<p>{displayDate}</p>
+				{(props.userId === props.authorId) ? <button className={styles.deleteCommentButton} onClick={deleteComment}><FaRegTrashAlt/></button> : <></>}
+				
+			</div>
+			<p>{props.content}</p>
+		</div>
+	): (<></>);
 }

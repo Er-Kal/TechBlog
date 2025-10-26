@@ -38,11 +38,12 @@ export default function LikeCounter(props: Props) {
         getLikeCount();
 	};
 
-	return (
+	return (<>
+		<h2>Likes</h2>
 		<div className={styles.likeContainer}>
-			<FaRegThumbsUp />
+            {user ? <button className={styles.likeButton} onClick={likeClicked}><FaRegThumbsUp/></button>: <FaRegThumbsUp />}
 			<p>{likes} </p>
-            {user && <button onClick={likeClicked}>Like</button>}
 		</div>
+	</>
 	);
 }

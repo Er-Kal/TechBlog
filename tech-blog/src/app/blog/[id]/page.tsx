@@ -24,7 +24,6 @@ export default async function BlogPage({ params }: { params: { id: string } }) {
 				content={blogData.content}
 				date_created={blogData.created_at}
 			/>
-			<p>These are the likes</p>
 			<LikeCounter id={blogId}/>
 			<Comments blogId={blogId}></Comments>
 		</main>

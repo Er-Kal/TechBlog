@@ -1,7 +1,6 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
 
 type LoginState = {
@@ -22,10 +21,12 @@ export async function login(
 	const { error } = await supabase.auth.signInWithPassword(data);
 
 	if (error) {
-		return { error: error.message };
+		return { error: error.message};
 	}
 
 	revalidatePath("/", "layout");
 	revalidatePath("/");
-	redirect("/");
+
+
+	return {error: null}
 }

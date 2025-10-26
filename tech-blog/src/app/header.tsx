@@ -52,6 +52,7 @@ export default function Header() {
 	const handleLogout = async () => {
 		await supabase.auth.signOut();
 		await refreshAuthState();
+		sessionStorage.clear();
 		location.reload();
 	};
 
