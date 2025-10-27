@@ -2,7 +2,7 @@ import DOMPurify from "dompurify";
 import { marked } from "marked";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import styles from "../styles/blogpreview.module.css";
+import styles from "./blogpreview.module.css";
 
 type PreviewProps = {
 	blogId: number;

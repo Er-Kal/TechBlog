@@ -1,11 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { marked } from "marked";
-import DOMPurify from "dompurify";
 import { createClient } from "@/utils/supabase/client";
 import Link from "next/link";
 import styles from "./blog.module.css";
+import BlogContent from "./blogContent";
 
 type Props = {
 	author_id: string;
@@ -14,16 +13,9 @@ type Props = {
 };
 
 export default function Blog(props: Props) {
-	const [html, setHTML] = useState<string>("");
 	const [authorName, setAuthorName] = useState<string>("");
 	const supabase = createClient();
 	useEffect(() => {
-		async function convertStringToHTML() {
-			const convertedHTML: string = await marked.parse(props.content);
-			const sanitisedHTML = await DOMPurify.sanitize(convertedHTML);
-			setHTML(sanitisedHTML);
-		}
-		convertStringToHTML();
 		async function retrieveAuthorName() {
 			const { data } = await supabase
 				.from("profiles")
@@ -55,7 +47,7 @@ export default function Blog(props: Props) {
 					Posted: <time dateTime={isoDate}>{displayDate}</time>
 				</p>
 			</div>
-			<div dangerouslySetInnerHTML={{ __html: html }}></div>
+			<BlogContent blogText={props.content}/>
 		</article>
 	);
 }
