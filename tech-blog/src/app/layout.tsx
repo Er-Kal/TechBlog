@@ -1,6 +1,6 @@
 import "./layout.css";
-import Header from "@/app/header";
-import Footer from "@/app/footer";
+import Header from "@/app/Header";
+import Footer from "@/app/Footer";
 
 export default async function RootLayout({
 	children,

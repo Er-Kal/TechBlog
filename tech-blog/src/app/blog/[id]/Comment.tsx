@@ -1,8 +1,8 @@
 import styles from "./blog.module.css";
 import Link from "next/link";
+import { createClient } from "@/utils/supabase/client";
 import { useState } from "react";
 import { deleteUserComment } from "./actions";
-import { FaRegTrashAlt } from 'react-icons/fa';
 
 type Props = {
 	content: string;
@@ -21,6 +21,7 @@ export default function Comment(props: Props) {
 		month: "long",
 		day: "numeric",
 	});
+	const supabase = createClient();
 	const [visible,setVisibility] = useState<boolean>(props.visible)
 
 	const deleteComment = () => {
@@ -33,7 +34,7 @@ export default function Comment(props: Props) {
 			<div className={styles.commentHead}>
 				<Link href={`/profile/${props.authorId}`}>{props.author}</Link>
 				<p>{displayDate}</p>
-				{(props.userId === props.authorId) ? <button className={styles.deleteCommentButton} onClick={deleteComment}><FaRegTrashAlt/></button> : <></>}
+				{(props.userId === props.authorId) ? <button className={styles.deleteCommentButton} onClick={deleteComment}><img src="@/"/></button> : <></>}
 				
 			</div>
 			<p>{props.content}</p>
