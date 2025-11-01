@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { createClient } from "@/utils/supabase/client";
 import Link from "next/link";
 import styles from "./blog.module.css";
-import BlogContent from "./blogContent";
+import BlogContent from "@/components/BlogContent";
 
 type Props = {
 	author_id: string;
@@ -20,8 +20,9 @@ export default function Blog(props: Props) {
 			const { data } = await supabase
 				.from("profiles")
 				.select("username")
-				.eq("id", props.author_id);
-			setAuthorName(data![0].username);
+				.eq("id", props.author_id)
+				.single();
+			setAuthorName(data!.username);
 		}
 		retrieveAuthorName();
 	}, [props, supabase]);

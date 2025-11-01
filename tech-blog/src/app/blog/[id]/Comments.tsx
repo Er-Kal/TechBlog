@@ -28,6 +28,7 @@ type commentState = {
 export default function Comments(props: Props) {
 	const [comments, setComments] = useState<CommentData[] | null>([]);
 	const [user, setUser] = useState<User | null>();
+	const [role, setRole] = useState<string | null>();
 	const supabase = createClient();
 
 	const [commentState, commentAction] = useActionState<commentState, FormData>(
@@ -40,6 +41,26 @@ export default function Comments(props: Props) {
 	useEffect(() => {
 		getComments(props.blogId).then((comments) => setComments(comments ?? null));
 	}, [props.blogId]);
+
+	useEffect(() =>{
+		const getUser = async () =>{
+			const {data} = await supabase
+			.from('profiles')
+			.select('role')
+			.eq('id',user?.id)
+			.single()
+			setRole(data?.role ?? "user")
+
+		}	
+		getUser()
+
+		const checkRole = async () => {
+			
+			const {data} = await supabase.rpc('get_my_role');
+			console.log(data);
+		}
+		checkRole();
+	},[user,supabase]);
 
 	useEffect(() => {
 		const getUser = async () => {
@@ -112,6 +133,7 @@ export default function Comments(props: Props) {
 								created_at={comment.created_at}
 								authorId={comment.authorId}
 								userId={user ? user.id : null}
+								role={role ?? null}
 								visible={true}
 							/>
 						))}

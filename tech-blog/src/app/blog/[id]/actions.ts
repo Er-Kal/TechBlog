@@ -101,5 +101,5 @@ export async function deleteUserComment(commentId: number){
 	if (!user) {
 		return;
 	}
-	await supabase.from("blogcomments").delete().eq("id", commentId).eq("author", user.id);
+	await supabase.from("blogcomments").delete().eq("id", commentId);
 }

@@ -68,6 +68,7 @@ export default function Header() {
 							Log Out
 						</a>
 						<Link href={"/profile/" + user.id}>Profile</Link>
+						<Link href={"/submit-blog/"}>Submit Blog</Link>
 					</>
 				) : (
 					<Link href="/login">Login</Link>

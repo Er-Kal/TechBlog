@@ -1,4 +1,4 @@
-import styles from './blog.module.css'
+import styles from '@/app/blog/[id]/blog.module.css'
 import { useEffect,useState } from 'react';
 import { marked } from "marked";
 import DOMPurify from "dompurify";
