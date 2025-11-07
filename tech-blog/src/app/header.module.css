@@ -12,6 +12,6 @@
 	align-self: flex-end;
 	padding-left: 24px;
 	a {
-		padding: 4px;
+		padding-left: 0.7rem;
 	}
 }

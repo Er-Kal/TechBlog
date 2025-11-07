@@ -13,6 +13,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	font-family: "Inter", sans-serif;
+	background-color: rgb(233, 233, 233);
 }
 
 a {
@@ -37,8 +38,29 @@ main {
 	flex-direction: column;
 	flex: 1;
 	max-width: 40rem;
-	padding-top: 2rem;
 	min-width: 40rem;
+	padding-top: 2rem;
+	padding: 1rem 1rem;
+	background-color: white;
+	position: relative;
+}
+main::before {
+	content: "";
+	position: absolute;
+
+	/* 3. Place it behind the parent */
+	z-index: -1;
+
+	/* 4. The "glow" setup */
+	top: 0;
+	left: -0.2rem; /* How much it sticks out on the left */
+	width: calc(100% + 0.4rem); /* 100% + 10px left + 10px right */
+	height: 100%; /* Exact same height, no vertical glow! */
+
+	background-color: white;
+
+	/* 5. Apply the blur */
+	filter: blur(15px);
 }
 
 button {
@@ -49,5 +71,18 @@ button {
 	padding: 0.5rem 1rem 0.5rem 1rem;
 	background-color: #f9ebe0;
 	border-radius: 0.3rem;
-	cursor:pointer;
+	cursor: pointer;
+}
+
+@media (max-width:700px) {
+	main{
+		min-width: 80vw;
+		max-width: 80vw;
+	}
+}
+@media (max-width:500px) {
+	main{
+		min-width: 95vw;
+		max-width: 95vw;
+	}
 }

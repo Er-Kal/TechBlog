@@ -1,6 +1,5 @@
 import styles from "./blog.module.css";
 import Link from "next/link";
-import { createClient } from "@/utils/supabase/client";
 import { useState } from "react";
 import { deleteUserComment } from "./actions";
 import { FaRegTrashAlt } from 'react-icons/fa';
