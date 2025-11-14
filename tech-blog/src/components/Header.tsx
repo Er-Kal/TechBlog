@@ -6,10 +6,12 @@ import { createClient } from "@/utils/supabase/client";
 import { useEffect, useState } from "react";
 import { User } from "@supabase/supabase-js";
 import { usePathname } from "next/navigation";
+import { RxHamburgerMenu } from "react-icons/rx";
 
 export default function Header() {
 	const supabase = createClient();
 	const [user, setUser] = useState<User | null>(null);
+	const [burgerOpen, setBurgerOpen] = useState<boolean>(false);
 	const pathname = usePathname();
 
 	const refreshAuthState = async () => {
@@ -56,6 +58,10 @@ export default function Header() {
 		location.reload();
 	};
 
+	const handleBurgerClick = () => {
+		setBurgerOpen(!burgerOpen);
+	};
+
 	return (
 		<header className={styles.header}>
 			<h1>DevGlobe</h1>
@@ -65,7 +71,6 @@ export default function Header() {
 				{user ? (
 					<>
 						<Link href={"/profile/" + user.id}>Profile</Link>
-						<Link href={"/submit-blog/"}>Submit Blog</Link>
 						<a style={{ cursor: "pointer" }} onClick={handleLogout}>
 							Log Out
 						</a>
@@ -74,6 +79,25 @@ export default function Header() {
 					<Link href="/login">Login</Link>
 				)}
 			</nav>
+			<div className={styles.hamburger}>
+				<RxHamburgerMenu size={24} onClick={handleBurgerClick} />
+				{burgerOpen && (
+					<div className={styles.hamburgerOpen}>
+						<Link href="/">Home</Link>
+						<Link href="/about">About</Link>
+						{user ? (
+							<>
+								<Link href={"/profile/" + user.id}>Profile</Link>
+								<a style={{ cursor: "pointer" }} onClick={handleLogout}>
+									Log Out
+								</a>
+							</>
+						) : (
+							<Link href="/login">Login</Link>
+						)}
+					</div>
+				)}
+			</div>
 		</header>
 	);
 }

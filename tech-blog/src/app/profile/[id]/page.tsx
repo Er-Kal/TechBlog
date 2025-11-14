@@ -1,24 +1,55 @@
+"use client";
+
 import { retrieveProfile } from "@/services/selectSpecificProfile";
 import { ProfileType } from "@/types/profile";
 import { retrieveUsersBlogs } from "@/services/selectUsersBlogs";
 import BlogListing from "./authoredBlogListing";
 import styles from "./profile.module.css";
 import ProfileLayout from "./profileLayout";
+import { createClient } from "@/utils/supabase/client";
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { User } from "@supabase/supabase-js";
+import { useParams } from "next/navigation";
+import { BlogType } from "@/types/blog";
 
-export default async function ProfilePage({
-	params,
-}: {
-	params: { id: string };
-}) {
-	const paramsData = await params;
-	const id = paramsData.id as string;
-	const profileData: ProfileType | null = await retrieveProfile(id);
+export default function ProfilePage() {
+	const supabase = createClient();
+	const [user, setUser] = useState<User | null>(null);
+	const [profileData, setProfileData] = useState<ProfileType | null>(null);
+	const [authoredBlogs, setAuthoredBlogs] = useState<BlogType[] | null>(null);
+	const params = useParams();
+	const id = params.id as string;
+
+	useEffect(() => {
+		const getProfileData = async () => {
+			const data = await retrieveProfile(id);
+			setProfileData(data);
+		};
+		getProfileData();
+	}, [id]);
+
+	useEffect(() => {
+		const getUser = async () => {
+			const {
+				data: { user },
+			} = await supabase.auth.getUser();
+			setUser(user ?? null);
+		};
+		getUser();
+	}, [supabase]);
+
+	useEffect(() => {
+		const getAuthoredBlogs = async () => {
+			const data = await retrieveUsersBlogs(id);
+			setAuthoredBlogs(data);
+		};
+		getAuthoredBlogs();
+	}, [supabase, id]);
 
 	if (!profileData) {
 		return <p>Loading profile, or this user doesn&apos;t exist...</p>;
 	}
-
-	const authoredBlogs = await retrieveUsersBlogs(id);
 
 	return (
 		<main className={styles.main}>
@@ -30,8 +61,13 @@ export default async function ProfilePage({
 				created_at={new Date(profileData.created_at).toLocaleDateString()}
 			/>
 			<div className={styles.userActivity}>
+				{user && (
+					<button>
+						<Link href={"/submit-blog/"}>Submit Blog</Link>
+					</button>
+				)}
 				{authoredBlogs && (
-					<div className="authored">
+					<div>
 						<p>Authored Blogs</p>
 						<ul>
 							{authoredBlogs.reverse().map((blogData) => (

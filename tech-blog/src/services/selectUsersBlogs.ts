@@ -1,7 +1,7 @@
 import { createClient } from "../utils/supabase/client";
 import { BlogType } from "@/types/blog";
 
-export async function retrieveUsersBlogs(id: string) {
+export async function retrieveUsersBlogs(id: string): Promise<BlogType[] | null> {
 	const supabase = createClient();
 	const { data, error } = await supabase
 		.from("blogs")

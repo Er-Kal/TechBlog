@@ -7,6 +7,7 @@ import Image from "next/image";
 import { submitBioChange } from "./bioChange";
 import { useActionState } from "react";
 import { uploadProfilePicture } from './uploadProfilePicture'
+import styles from './profile.module.css'
 
 type UserData = {
 	id: string;
@@ -67,7 +68,7 @@ export default function ProfileLayout(props: UserData) {
     }
     const uploading = false;
 	return (
-		<div>
+		<div className={styles.profileLayout}>
 			<p>{props.username}</p>
 			<Image
 				src={props.avi_url}

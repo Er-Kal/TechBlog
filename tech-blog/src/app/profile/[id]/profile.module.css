@@ -4,19 +4,34 @@
 	justify-content: space-evenly;
 }
 
+.profileLayout {
+	width: 200px;
+}
+
 .userActivity {
-	padding-left: 2rem;
+	width: 100%;
+	padding: 0.5rem;
+	> div {
+		padding-bottom: 1rem;
+	}
 }
 
 .blogListingListItem {
 	list-style: none;
 	margin-top: 0.25rem;
 	margin-bottom: 0.25rem;
+	> * {
+		padding-right: 0.2rem;
+	}
+	
+	border-top: 2px solid rgba(62, 62, 62, 0.15);
 }
+
 
 .blogListing {
 	display: flex;
 	flex-direction: row;
-	min-width: 25rem;
+	width: 100%;
 	justify-content: space-between;
+	flex-wrap: wrap;
 }
