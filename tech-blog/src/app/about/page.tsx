@@ -1,4 +1,6 @@
-export default function About() {
+// About page, just contains information on the site.
+
+export default function Page() {
 	return (
 		<main>
 			<h1>About us</h1>

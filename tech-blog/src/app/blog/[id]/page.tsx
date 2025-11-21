@@ -5,7 +5,9 @@ import Blog from "@/app/blog/[id]/blog";
 import LikeCounter from "./LikeCounter";
 import Comments from './Comments'
 
-export default async function BlogPage({ params }: { params: { id: string } }) {
+// Main blog page file
+
+export default async function Page({ params }: { params: { id: string } }) {
 	const data = await params;
 	const blogId: number = Number(data.id);
 	const blogData: BlogType | null = await retrieveBlog(blogId);

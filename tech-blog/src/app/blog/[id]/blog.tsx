@@ -12,6 +12,7 @@ type Props = {
 	date_created: string;
 };
 
+// Handles the outline of the blog content, author's details, blog text
 export default function Blog(props: Props) {
 	const [authorName, setAuthorName] = useState<string>("");
 	const supabase = createClient();

@@ -7,6 +7,9 @@ type LoginState = {
 	error: string | null;
 };
 
+// Login action
+// Authenticates with supabase and redirects the user to the main page
+
 export async function login(
 	prevState: LoginState,
 	formData: FormData

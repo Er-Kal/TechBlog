@@ -9,6 +9,8 @@ type LoginState = {
 	error: string | null;
 };
 
+// Login form component, handles form submission through an action
+
 export default function LoginForm() {
 	const [state, formAction] = useActionState<LoginState, FormData>(login, {
 		error: null,

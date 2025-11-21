@@ -11,6 +11,8 @@ type Props = {
 	id: number;
 };
 
+// Like counter component, allows the user to like the blog post
+
 export default function LikeCounter(props: Props) {
 	const [likes, setLikes] = useState<number>(0);
     const [user, setUser] = useState<User | null>();

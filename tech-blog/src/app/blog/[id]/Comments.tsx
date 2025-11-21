@@ -25,6 +25,10 @@ type commentState = {
 	error: string | null;
 };
 
+// Component to store the comments as a list and renders them using the Comment component
+
+// Uses supabase event subscriptions to handle deletion of comments and additions.
+
 export default function Comments(props: Props) {
 	const [comments, setComments] = useState<CommentData[] | null>([]);
 	const [user, setUser] = useState<User | null>();

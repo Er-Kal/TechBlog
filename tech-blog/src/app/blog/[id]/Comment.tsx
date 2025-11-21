@@ -15,6 +15,7 @@ type Props = {
 	role:string | null;
 };
 
+// Comment component, allows for deletion of own comment, or if the user is an admin
 export default function Comment(props: Props) {
 	const createdDate = new Date(props.created_at);
 	const displayDate = createdDate.toLocaleDateString("en-US", {

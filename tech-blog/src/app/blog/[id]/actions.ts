@@ -1,9 +1,16 @@
 import { createClient } from "@/utils/supabase/client";
 
+
+// State for comment form action, stores if there is an error or not.
 type commentState = {
 	error: string | null;
 };
 
+// Function which handles liking blog posts.
+// Essentially checks if the user is logged in
+// If logged in, check if they have already liked the post
+// 		If liked: remove the like
+// 		If not liked: add a row into the database to store the user's like
 export async function likeBlog(blogId: number) {
 	const supabase = await createClient();
 	const {
