@@ -6,6 +6,7 @@ type BlogListing = {
 	created_at: string;
 	title: string;
 	id: number;
+	submission: boolean | null;
 };
 
 export default function BlogListing(props: BlogListing) {
@@ -15,9 +16,10 @@ export default function BlogListing(props: BlogListing) {
 		month: "long",
 		day: "numeric",
 	});
+	const href = props.submission==true?`/submission/${props.id}`:`/blog/${props.id}`
 	return (
 		<li className={styles.blogListingListItem}>
-			<Link href={"/blog/" + props.id} className={styles.blogListing}>
+			<Link href={href} className={styles.blogListing}>
 				<p>{props.title}</p>
 				<p>{displayDate}</p>
 			</Link>

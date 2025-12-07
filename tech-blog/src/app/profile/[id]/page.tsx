@@ -2,8 +2,8 @@
 
 import { retrieveProfile } from "@/services/selectSpecificProfile";
 import { ProfileType } from "@/types/profile";
-import { retrieveUsersBlogs } from "@/services/selectUsersBlogs";
-import BlogListing from "./authoredBlogListing";
+import { retrieveUsersBlogs, retrieveLikedBlogs, submission, retrieveBlogSubmissions } from "./actions";
+import BlogListing from "./blogListing";
 import styles from "./profile.module.css";
 import ProfileLayout from "./profileLayout";
 import { createClient } from "@/utils/supabase/client";
@@ -18,9 +18,12 @@ export default function ProfilePage() {
 	const [user, setUser] = useState<User | null>(null);
 	const [profileData, setProfileData] = useState<ProfileType | null>(null);
 	const [authoredBlogs, setAuthoredBlogs] = useState<BlogType[] | null>(null);
+	const [likedBlogs, setLikedBlogs] = useState<BlogType[] | null>(null);
+	const [submissions, setSubmissions] = useState<submission[] | null>(null);
 	const params = useParams();
 	const id = params.id as string;
 
+	// Get profile data
 	useEffect(() => {
 		const getProfileData = async () => {
 			const data = await retrieveProfile(id);
@@ -29,6 +32,7 @@ export default function ProfilePage() {
 		getProfileData();
 	}, [id]);
 
+	// Get currently logged in user
 	useEffect(() => {
 		const getUser = async () => {
 			const {
@@ -39,6 +43,7 @@ export default function ProfilePage() {
 		getUser();
 	}, [supabase]);
 
+	// Get authored blogs
 	useEffect(() => {
 		const getAuthoredBlogs = async () => {
 			const data = await retrieveUsersBlogs(id);
@@ -46,6 +51,29 @@ export default function ProfilePage() {
 		};
 		getAuthoredBlogs();
 	}, [supabase, id]);
+
+	// Get user's liked blogs
+	useEffect( () => {
+		const getLikedBlogs = async () => {
+			const data = await retrieveLikedBlogs(id);
+			setLikedBlogs(data);
+		}
+		getLikedBlogs();
+	}
+	,[supabase,id])
+
+	// Get Blog Submissions if the user is logged in
+
+	useEffect( () => {
+		const getBlogSubmissions = async () => {
+			const data = await retrieveBlogSubmissions(id);
+			setSubmissions(data);
+		}
+
+		if (user && user.id == id){
+			getBlogSubmissions();
+		}
+	},[supabase,id,user])
 
 	if (!profileData) {
 		return <p>Loading profile, or this user doesn&apos;t exist...</p>;
@@ -61,7 +89,7 @@ export default function ProfilePage() {
 				created_at={new Date(profileData.created_at).toLocaleDateString()}
 			/>
 			<div className={styles.userActivity}>
-				{user && (
+				{user && user.id==id && (
 					<button>
 						<Link href={"/submit-blog/"}>Submit Blog</Link>
 					</button>
@@ -76,13 +104,47 @@ export default function ProfilePage() {
 									created_at={blogData.created_at}
 									title={blogData.title}
 									id={blogData.id}
+									submission={false}
 								/>
 							))}
 						</ul>
 					</div>
 				)}
 				<div className="likedBlogs">
-					<p>Liked Blogs</p>
+					{likedBlogs && (
+					<div>
+						<p>Liked Blogs</p>
+						<ul>
+							{likedBlogs.reverse().map((blogData) => (
+								<BlogListing
+									key={blogData.id}
+									created_at={blogData.created_at}
+									title={blogData.title}
+									id={blogData.id}
+									submission={false}
+								/>
+							))}
+						</ul>
+					</div>
+				)}
+				</div>
+				<div className="submissions">
+					{submissions && (
+					<div>
+						<p>Liked Blogs</p>
+						<ul>
+							{submissions.reverse().map((blogData) => (
+								<BlogListing
+									key={blogData.id}
+									created_at={blogData.created_at}
+									title={blogData.blogtitle}
+									id={blogData.id}
+									submission={true}
+								/>
+							))}
+						</ul>
+					</div>
+				)}
 				</div>
 			</div>
 		</main>
