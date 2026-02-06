@@ -2,7 +2,12 @@
 
 import { retrieveProfile } from "@/services/selectSpecificProfile";
 import { ProfileType } from "@/types/profile";
-import { retrieveUsersBlogs, retrieveLikedBlogs, submission, retrieveBlogSubmissions } from "./actions";
+import {
+	retrieveUsersBlogs,
+	retrieveLikedBlogs,
+	submission,
+	retrieveBlogSubmissions,
+} from "./actions";
 import BlogListing from "./blogListing";
 import styles from "./profile.module.css";
 import ProfileLayout from "./profileLayout";
@@ -53,27 +58,26 @@ export default function ProfilePage() {
 	}, [supabase, id]);
 
 	// Get user's liked blogs
-	useEffect( () => {
+	useEffect(() => {
 		const getLikedBlogs = async () => {
 			const data = await retrieveLikedBlogs(id);
 			setLikedBlogs(data);
-		}
+		};
 		getLikedBlogs();
-	}
-	,[supabase,id])
+	}, [supabase, id]);
 
 	// Get Blog Submissions if the user is logged in
 
-	useEffect( () => {
+	useEffect(() => {
 		const getBlogSubmissions = async () => {
 			const data = await retrieveBlogSubmissions(id);
 			setSubmissions(data);
-		}
+		};
 
-		if (user && user.id == id){
+		if (user && user.id == id) {
 			getBlogSubmissions();
 		}
-	},[supabase,id,user])
+	}, [supabase, id, user]);
 
 	if (!profileData) {
 		return <p>Loading profile, or this user doesn&apos;t exist...</p>;
@@ -87,9 +91,10 @@ export default function ProfilePage() {
 				avi_url={profileData.avatar_url}
 				bio={profileData.bio}
 				created_at={new Date(profileData.created_at).toLocaleDateString()}
+				role={profileData.role}
 			/>
 			<div className={styles.userActivity}>
-				{user && user.id==id && (
+				{user && user.id == id && (
 					<button>
 						<Link href={"/submit-blog/"}>Submit Blog</Link>
 					</button>
@@ -112,39 +117,39 @@ export default function ProfilePage() {
 				)}
 				<div className="likedBlogs">
 					{likedBlogs && (
-					<div>
-						<p>Liked Blogs</p>
-						<ul>
-							{likedBlogs.reverse().map((blogData) => (
-								<BlogListing
-									key={blogData.id}
-									created_at={blogData.created_at}
-									title={blogData.title}
-									id={blogData.id}
-									submission={false}
-								/>
-							))}
-						</ul>
-					</div>
-				)}
+						<div>
+							<p>Liked Blogs</p>
+							<ul>
+								{likedBlogs.reverse().map((blogData) => (
+									<BlogListing
+										key={blogData.id}
+										created_at={blogData.created_at}
+										title={blogData.title}
+										id={blogData.id}
+										submission={false}
+									/>
+								))}
+							</ul>
+						</div>
+					)}
 				</div>
 				<div className="submissions">
 					{submissions && (
-					<div>
-						<p>Liked Blogs</p>
-						<ul>
-							{submissions.reverse().map((blogData) => (
-								<BlogListing
-									key={blogData.id}
-									created_at={blogData.created_at}
-									title={blogData.blogtitle}
-									id={blogData.id}
-									submission={true}
-								/>
-							))}
-						</ul>
-					</div>
-				)}
+						<div>
+							<p>Blog Submissions</p>
+							<ul>
+								{submissions.reverse().map((blogData) => (
+									<BlogListing
+										key={blogData.id}
+										created_at={blogData.created_at}
+										title={blogData.blogtitle}
+										id={blogData.id}
+										submission={true}
+									/>
+								))}
+							</ul>
+						</div>
+					)}
 				</div>
 			</div>
 		</main>

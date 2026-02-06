@@ -35,3 +35,13 @@
 	justify-content: space-between;
 	flex-wrap: wrap;
 }
+
+.userName{
+	display: flex;
+	flex-direction: row;
+	align-items: end;
+	gap:0.2rem;
+	p{
+		color: #414141;
+	}
+}

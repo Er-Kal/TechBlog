@@ -15,6 +15,7 @@ type UserData = {
 	avi_url: string;
 	created_at: string;
 	bio: string;
+	role: string;
 };
 
 type BioState = {
@@ -69,7 +70,10 @@ export default function ProfileLayout(props: UserData) {
     const uploading = false;
 	return (
 		<div className={styles.profileLayout}>
-			<p>{props.username}</p>
+			<div className={styles.userName}>
+				<h2>{props.username}</h2>
+				{props.role=="admin"?<p>Admin</p>:<></>}
+			</div>
 			<Image
 				src={props.avi_url}
 				width={196}

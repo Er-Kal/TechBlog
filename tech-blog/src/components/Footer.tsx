@@ -6,7 +6,6 @@ export default function Footer() {
 		<footer className={styles.footer}>
 			<p>{new Date().getFullYear()} Tech Blog</p>
 			<nav className={styles.nav}>
-				<Link href="/contact">Contact</Link>
 				<Link href="https://github.com/Er-Kal">Github</Link>
 			</nav>
 		</footer>

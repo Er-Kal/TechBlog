@@ -1,5 +1,7 @@
 "use client";
 
+import { ProfileType } from "@/types/profile";
+import { retrieveProfile } from "@/services/selectSpecificProfile";
 import styles from "./header.module.css";
 import Link from "next/link";
 import { createClient } from "@/utils/supabase/client";
@@ -13,6 +15,7 @@ export default function Header() {
 	const [user, setUser] = useState<User | null>(null);
 	const [burgerOpen, setBurgerOpen] = useState<boolean>(false);
 	const pathname = usePathname();
+	const [profileData, setProfileData] = useState<ProfileType | null>(null);
 
 	const refreshAuthState = async () => {
 		const {
@@ -50,6 +53,16 @@ export default function Header() {
 		};
 		refreshAuthState();
 	}, [pathname, supabase]);
+
+	useEffect(() => {
+		const getProfileData = async () => {
+			if (user){
+				const userData = await retrieveProfile(user.id);
+				setProfileData(userData);
+			}
+		}
+		getProfileData();
+	})
 
 	const handleLogout = async () => {
 		await supabase.auth.signOut();

@@ -4,4 +4,5 @@ export type ProfileType = {
 	bio: string;
 	avatar_url: string;
 	created_at: string;
+	role: string;
 };
