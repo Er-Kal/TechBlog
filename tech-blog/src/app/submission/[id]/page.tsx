@@ -5,7 +5,7 @@ import { createClient } from "@/utils/supabase/client";
 import { useEffect, useState } from "react";
 import BlogContent from "@/components/BlogContent";
 import { retrieveUserRole } from "@/services/getUserRole";
-import { rejectSubmission } from "./actions";
+import { acceptSubmission, rejectSubmission } from "./actions";
 
 type submissionDataType = {
 	id: number;
@@ -68,6 +68,11 @@ export default function SubmissionPage() {
 		router.push("/submitted-blogs");
 	};
 
+	const accept = async () => {
+		await acceptSubmission(id);
+		router.push("/");
+	}
+
 	return (
 		<main>
 			{submissionData && (
@@ -77,6 +82,7 @@ export default function SubmissionPage() {
 							<>
 								<h2>Admin Panel</h2>
 								<button onClick={reject}>Reject</button>
+								<button onClick={accept}>Accept</button>
 								<p>If admin, button to approve,deny,create comment</p>
 							</>
 						) : (

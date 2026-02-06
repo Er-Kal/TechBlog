@@ -5,6 +5,10 @@
 	width: 100%;
 	flex-direction: row;
 	background-color: #208aae;
+	justify-content: center;
+	h1{
+		padding-right: 0.4rem;
+	}
 }
 
 .nav {
@@ -13,14 +17,11 @@
 	padding-left: 0.2rem;
 	position: relative;
 	a {
-		padding-left: 0.4rem;
+		padding: 0.4rem;
 	}
-	> *::before{
-		content:"";
-		height:100%;
-		border: 1px solid black;
-		left:-0.2rem;
-		position: relative;
+	> :hover{
+		background-color: rgba(0, 0, 0, 0.116);
+		border-radius: 0.5rem;
 	}
 }
 

@@ -8,6 +8,8 @@ import { submitBioChange } from "./bioChange";
 import { useActionState } from "react";
 import { uploadProfilePicture } from './uploadProfilePicture'
 import styles from './profile.module.css'
+import { retrieveUserRole } from "@/services/getUserRole";
+import Link from "next/link";
 
 type UserData = {
 	id: string;
@@ -27,6 +29,7 @@ export default function ProfileLayout(props: UserData) {
 	const [user, setUser] = useState<User | null>(null);
 	const [bioEditToggle, setBioEditToggle] = useState<boolean>(false);
 	const [bioContent, setBioContent] = useState<string>(props.bio);
+	const [userRole, setUserRole] = useState<String | null>();
 
 	const [bioState, bioAction] = useActionState<BioState, FormData>(
 		submitBioChange,
@@ -42,6 +45,14 @@ export default function ProfileLayout(props: UserData) {
 		};
 		getUser();
 	}, [supabase]);
+
+	useEffect(() => {
+		const getUserRole = async () => {
+			const data = await retrieveUserRole();
+			setUserRole(data);
+		}
+		getUserRole();
+	})
 
 	useEffect(() => {
 		if (bioState && bioState.error === null) {
@@ -108,7 +119,8 @@ export default function ProfileLayout(props: UserData) {
 				</form>
 			)}
 			<p>Created At: {props.created_at}</p>
-			{bioState && bioState.error && <p>{bioState.error}</p>}
+			{bioState && bioState.error && <p>{bioState.error}</p>}	
+			{user && user.id === props.id && userRole==="admin" && (<button><Link href="/submitted-blogs">Submitted Blogs</Link></button>)}
 		</div>
 	);
 }
