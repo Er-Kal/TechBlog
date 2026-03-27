@@ -1,4 +1,7 @@
 # Tech Blog
+![Next.js](https://img.shields.io/badge/Next.js-000?logo=next.js)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript)
+![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?logo=supabase)
 
 ## Description
 Tech Blog is a full-stack web application built with Next.js that allows users to submit, view, and interact with technical blog posts. It features user authentication, blog management, commenting, and liking functionality, making it an ideal platform for tech enthusiasts to share and discuss content.
