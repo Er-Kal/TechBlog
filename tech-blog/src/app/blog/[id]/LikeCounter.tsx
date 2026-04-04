@@ -24,7 +24,7 @@ export default function LikeCounter(props: Props) {
             setUser(user);
         }
         getUser();
-    })
+    }, [])
 
 	const getLikeCount = async () => {
 		const amount = await getLikes(props.id);
@@ -33,7 +33,7 @@ export default function LikeCounter(props: Props) {
 
 	useEffect(() => {
 		getLikeCount();
-	});
+	}, []);
 
 	const likeClicked = () => {
 		likeBlog(props.id);

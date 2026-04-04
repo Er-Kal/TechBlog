@@ -64,7 +64,7 @@ export default function Comments(props: Props) {
 			console.log(data);
 		}
 		checkRole();
-	},[user,supabase]);
+	},[user]);
 
 	useEffect(() => {
 		const getUser = async () => {
@@ -74,7 +74,7 @@ export default function Comments(props: Props) {
 			setUser(user ?? null);
 		};
 		getUser();
-	},[supabase]);
+	}, []);
 
 	useEffect(() =>{
 		const channel = supabase

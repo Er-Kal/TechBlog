@@ -26,7 +26,7 @@ export default function Blog(props: Props) {
 			setAuthorName(data!.username);
 		}
 		retrieveAuthorName();
-	}, [props, supabase]);
+	}, [props.author_id]);
 
 	const createdDate = new Date(props.date_created);
 	const displayDate = createdDate.toLocaleDateString("en-US", {

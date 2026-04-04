@@ -42,17 +42,7 @@ export default function Header() {
 		return () => {
 			listener.subscription.unsubscribe();
 		};
-	}, [supabase]);
-
-	useEffect(() => {
-		const refreshAuthState = async () => {
-			const {
-				data: { user },
-			} = await supabase.auth.getUser();
-			setUser(user ?? null);
-		};
-		refreshAuthState();
-	}, [pathname, supabase]);
+	}, []);
 
 	useEffect(() => {
 		const getProfileData = async () => {
@@ -62,7 +52,7 @@ export default function Header() {
 			}
 		}
 		getProfileData();
-	})
+	}, [user])
 
 	const handleLogout = async () => {
 		await supabase.auth.signOut();
